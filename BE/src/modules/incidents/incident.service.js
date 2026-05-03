@@ -155,9 +155,16 @@ const createIncident = async ({ body, files, currentUser }) => {
     const insertedImages = [];
 
     /**
-     * Bảng HinhAnhBaoCao không có MaBaoCao.
-     * Ảnh phải gắn vào MaChiTietBaoCao.
-     * Nếu một phản ánh có nhiều chi tiết, ảnh upload sẽ gắn vào chi tiết đầu tiên.
+     * Quy ước hiện tại:
+     * - HinhAnhBaoCao không có MaBaoCao, chỉ liên kết đến MaChiTietBaoCao.
+     * - Request multipart/form-data hiện đang upload ảnh ở cấp "sự cố tổng thể",
+     *   không map ảnh riêng cho từng phần tử trong chiTietBaoCao.
+     * - Vì vậy, nếu một sự cố có nhiều chi tiết/cây liên quan, toàn bộ ảnh upload
+     *   sẽ tạm thời gắn vào chi tiết đầu tiên để tối ưu UX cho phiên bản hiện tại.
+     *
+     * Nếu nghiệp vụ trong tương lai yêu cầu "cây nào ảnh đó", cần đổi contract API:
+     * frontend phải gửi ảnh theo từng item chiTietBaoCao (multipart theo index hoặc
+     * JSON + Base64), khi đó backend mới có thể map đúng MaChiTietBaoCao tương ứng.
      */
     const firstDetail = insertedDetails[0];
 

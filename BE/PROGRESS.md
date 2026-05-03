@@ -34,6 +34,12 @@
 - [x] Loi nghiep vu va loi validation phai duoc quan ly tap trung bang `AppError`.
 - [x] Cam hard delete cho cac nghiep vu chinh neu du lieu da duoc su dung trong he thong.
 
+## Known Decisions
+
+- [x] Incident image upload hien tai dang o cap "su co tong the". Neu mot bao cao su co co nhieu `chiTietBaoCao`, toan bo anh upload multipart se duoc gan vao `MaChiTietBaoCao` dau tien.
+- [x] Day la quyet dinh chu dong de toi uu UX va don gian hoa request cho mobile/web trong giai doan hien tai.
+- [x] Neu tuong lai can map anh dung theo tung cay/chi tiet, phai doi contract frontend-backend: gui anh theo tung item `chiTietBaoCao` bang multipart co mapping theo index hoac JSON + Base64.
+
 ## Next Steps
 
 - [x] Chuyen sang setup Frontend ReactJS va mapping day du voi backend hien tai.
