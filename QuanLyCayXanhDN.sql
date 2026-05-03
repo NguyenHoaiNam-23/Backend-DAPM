@@ -422,8 +422,11 @@ GO
 -- ==========================================
 
 INSERT INTO VaiTro (MaVaiTro, TenVaiTro) VALUES 
-('ADMIN', N'Quản trị hệ thống'), ('CANBO', N'Cán bộ quản lý'), 
-('NVKT', N'Nhân viên kỹ thuật'), ('CONGNAN', N'Công nhân');
+('ADMIN', N'Quản trị hệ thống'), 
+('CANBO', N'Cán bộ quản lý'), 
+('NVKT', N'Nhân viên kỹ thuật'), 
+('CONGNAN', N'Công nhân'),
+('NGUOIDAN', N'Người dân');
 GO
 
 INSERT INTO XaPhuong (MaXaPhuong, TenXaPhuong) VALUES 
@@ -441,7 +444,8 @@ INSERT INTO NguoiDung (MaNguoiDung, TenDangNhap, MatKhauHash, HoTen, SDT, Email,
 ('U001', 'admin_nam', 'hash123', N'Nguyễn Hoài Nam', '0905123456', 'nam@gmail.com', 'ADMIN', 'D01', 'P01'),
 ('U002', 'cb_ha', 'hash123', N'Trần Văn Hà', '0905654321', 'ha@gmail.com', 'CANBO', 'D01', 'P01'),
 ('U003', 'nv_minh', 'hash123', N'Lê Quang Minh', '0905111222', 'minh@gmail.com', 'NVKT', 'D02', 'P01'),
-('U004', 'cn_hung', 'hash123', N'Phạm Tuấn Hùng', '0905333444', 'hung@gmail.com', 'CONGNAN', 'D02', 'P01');
+('U004', 'cn_hung', 'hash123', N'Phạm Tuấn Hùng', '0905333444', 'hung@gmail.com', 'CONGNAN', 'D02', 'P01'),
+('U005', 'nd_hoa', 'hash123', N'Nguyễn Thị Hoa', '0905444555', 'hoa@gmail.com', 'NGUOIDAN', 'D01', 'P01');
 GO
 
 INSERT INTO DanhMucCayTrong (MaDMCay, TenCayTrong, LoaiCay) VALUES 

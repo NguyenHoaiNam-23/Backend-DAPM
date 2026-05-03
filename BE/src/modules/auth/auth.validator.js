@@ -37,10 +37,6 @@ const registerSchema = Joi.object({
     "string.min": "Mật khẩu phải có ít nhất 6 ký tự"
   }),
 
-  maVaiTro: Joi.string()
-    .valid("ADMIN", "CANBO", "NVKT", "CONGNAN")
-    .default("CONGNAN"),
-
   maXaPhuong: Joi.string().max(20).allow(null, ""),
   maTuyenDuong: Joi.string().max(20).allow(null, ""),
   diaChi: Joi.string().max(100).allow(null, "")

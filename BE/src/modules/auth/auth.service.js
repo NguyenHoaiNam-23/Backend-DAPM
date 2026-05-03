@@ -116,7 +116,7 @@ const register = async (body) => {
     sdt: value.sdt || null,
     matKhauHash: hashedPassword,
     trangThai: "Hoạt động",
-    maVaiTro: value.maVaiTro,
+    maVaiTro: "NGUOIDAN",
     maXaPhuong: value.maXaPhuong || null,
     maTuyenDuong: value.maTuyenDuong || null,
     diaChi: value.diaChi || null
