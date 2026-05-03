@@ -341,10 +341,12 @@ const rejectIncident = async (maBaoCao, data) => {
 /**
  * Phản hồi kết quả xử lý.
  */
-const replyIncident = async (maBaoCao, data) => {
-  const pool = await getConnection();
+const replyIncident = async (maBaoCao, data, transaction = null) => {
+  const request = transaction
+    ? new sql.Request(transaction)
+    : (await getConnection()).request();
 
-  const result = await pool.request()
+  const result = await request
     .input("MaBaoCao", sql.VarChar, maBaoCao)
     .input("TraLoiPhanHoi", sql.NVarChar, data.traLoiPhanHoi)
     .input("PDFDinhKemXuLy", sql.VarChar, data.pdfDinhKemXuLy || null)

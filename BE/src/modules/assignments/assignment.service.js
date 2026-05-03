@@ -311,11 +311,15 @@ const executeTask = async ({ maChiTiet, body, files, currentUser }) => {
   try {
     await transaction.begin();
 
-    const updatedDetail = await assignmentDetailRepository.executeTask(maChiTiet, {
-      xacNhanHoanTat: value.xacNhanHoanTat,
-      khoiLuongHoanThanh: value.khoiLuongHoanThanh || null,
-      lyDo: value.lyDo || null
-    });
+    const updatedDetail = await assignmentDetailRepository.executeTask(
+      maChiTiet,
+      {
+        xacNhanHoanTat: value.xacNhanHoanTat,
+        khoiLuongHoanThanh: value.khoiLuongHoanThanh || null,
+        lyDo: value.lyDo || null
+      },
+      transaction
+    );
 
     const beforeImages = [];
 
@@ -429,10 +433,14 @@ const reworkTask = async ({ maChiTiet, body, files, currentUser }) => {
   try {
     await transaction.begin();
 
-    const updatedDetail = await assignmentDetailRepository.reworkTask(maChiTiet, {
-      khoiLuongHoanThanh: value.khoiLuongHoanThanh || null,
-      ghiChuLamLai: value.ghiChuLamLai || null
-    });
+    const updatedDetail = await assignmentDetailRepository.reworkTask(
+      maChiTiet,
+      {
+        khoiLuongHoanThanh: value.khoiLuongHoanThanh || null,
+        ghiChuLamLai: value.ghiChuLamLai || null
+      },
+      transaction
+    );
 
     const beforeImages = [];
 

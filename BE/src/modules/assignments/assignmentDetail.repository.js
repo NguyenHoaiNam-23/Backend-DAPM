@@ -244,10 +244,12 @@ const acceptTask = async (maChiTiet) => {
   return result.recordset[0];
 };
 
-const executeTask = async (maChiTiet, data) => {
-  const pool = await getConnection();
+const executeTask = async (maChiTiet, data, transaction = null) => {
+  const request = transaction
+    ? new sql.Request(transaction)
+    : (await getConnection()).request();
 
-  const result = await pool.request()
+  const result = await request
     .input("MaChiTiet", sql.VarChar, maChiTiet)
     .input("XacNhanHoanTat", sql.Bit, data.xacNhanHoanTat)
     .input("KhoiLuongHoanThanh", sql.NVarChar, data.khoiLuongHoanThanh || null)
@@ -310,14 +312,17 @@ const findReworkTasks = async (queryParams) => {
   });
 };
 
-const reworkTask = async (maChiTiet, data) => {
-  const pool = await getConnection();
+const reworkTask = async (maChiTiet, data, transaction = null) => {
 
   const ghiChuLamLai = data.ghiChuLamLai
     ? `\n[Làm lại] ${data.ghiChuLamLai}`
     : "";
 
-  const result = await pool.request()
+  const request = transaction
+    ? new sql.Request(transaction)
+    : (await getConnection()).request();
+
+  const result = await request
     .input("MaChiTiet", sql.VarChar, maChiTiet)
     .input("KhoiLuongHoanThanh", sql.NVarChar, data.khoiLuongHoanThanh || null)
     .input("GhiChuLamLai", sql.NVarChar, ghiChuLamLai)

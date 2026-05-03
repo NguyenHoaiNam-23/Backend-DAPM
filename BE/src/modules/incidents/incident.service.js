@@ -359,15 +359,31 @@ const replyIncident = async ({ maBaoCao, body, file, currentUser }) => {
     }
   }
 
-  const updatedIncident = await incidentRepository.replyIncident(maBaoCao, {
-    traLoiPhanHoi: value.traLoiPhanHoi,
-    pdfDinhKemXuLy: buildFilePathForDb(file),
-    maNguoiXuLy
-  });
+  const pool = await getConnection();
+  const transaction = new sql.Transaction(pool);
 
-  await incidentDetailRepository.markDetailsAsResolved(maBaoCao);
+  try {
+    await transaction.begin();
 
-  return updatedIncident;
+    const updatedIncident = await incidentRepository.replyIncident(
+      maBaoCao,
+      {
+        traLoiPhanHoi: value.traLoiPhanHoi,
+        pdfDinhKemXuLy: buildFilePathForDb(file),
+        maNguoiXuLy
+      },
+      transaction
+    );
+
+    await incidentDetailRepository.markDetailsAsResolved(maBaoCao, transaction);
+
+    await transaction.commit();
+
+    return updatedIncident;
+  } catch (error) {
+    await transaction.rollback();
+    throw error;
+  }
 };
 
 module.exports = {

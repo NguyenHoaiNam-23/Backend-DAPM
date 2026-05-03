@@ -113,10 +113,12 @@ const findDetailsByIncidentId = async (maBaoCao) => {
 /**
  * Đánh dấu toàn bộ chi tiết báo cáo đã xử lý.
  */
-const markDetailsAsResolved = async (maBaoCao) => {
-  const pool = await getConnection();
+const markDetailsAsResolved = async (maBaoCao, transaction = null) => {
+  const request = transaction
+    ? new sql.Request(transaction)
+    : (await getConnection()).request();
 
-  await pool.request()
+  await request
     .input("MaBaoCao", sql.VarChar, maBaoCao)
     .query(`
       UPDATE ChiTietBaoCao
