@@ -1,0 +1,5 @@
+node_modules
+.env
+src/uploads/temp
+npm-debug.log
+.DS_Store
